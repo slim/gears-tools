@@ -198,7 +198,9 @@ function executeAndPrintResult(db, sql) {
     sb.push('</tr></thead><tbody>');
 
     var odd = true;
+	var rowCount = 0;
     while (rs.isValidRow()) {
+	  rowCount++;
       sb.push('<tr>');
         for (i = 0; i < cols; i++) {
         sb.push('<td class=' + (odd ? 'odd' : 'even') + '>',
@@ -212,6 +214,7 @@ function executeAndPrintResult(db, sql) {
     rs.close();
   }
   sb.push('</tbody></table>');
+  sb.push('<p><sub>'+ rowCount +' rows in set</sub></p>');
   var output = document.createElement('div');
   document.getElementById('output').appendChild(output);
   output.innerHTML = sb.join('');
